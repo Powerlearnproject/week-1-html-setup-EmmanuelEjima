@@ -1,0 +1,97 @@
+name: HTML Structure Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check HTML structure
+        run: |
+          # Search for the existence of required HTML tags
+          if ! grep -q '<!DOCTYPE html>' index.html; then
+            echo "HTML tag <!DOCTYPE> not found"
+            exit 1
+          fi
+          
+          if ! grep -q '<html' index.html; then
+            echo "HTML tag <html> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<head' index.html; then
+            echo "HTML tag <head> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<meta charset' index.html; then
+            echo "HTML tag <meta charset> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<meta viewport' index.html; then
+            echo "HTML tag <meta viewport> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<title>' index.html; then
+            echo "HTML tag <title> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<body' index.html; then
+            echo "HTML tag <body> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<header' index.html; then
+            echo "HTML tag <header> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<h1' index.html; then
+            echo "HTML tag <h1> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<p' index.html; then
+            echo "HTML tag <p> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<form' index.html; then
+            echo "HTML tag <form> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<table' index.html; then
+            echo "HTML tag <table> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<img' index.html; then
+            echo "HTML tag <img> not found"
+            exit 1
+          fi
+
+          if ! grep -q '<a href="https://google.com" ' index.html; then
+            echo "HTML tag <a href="https://google.com> not found"
+            exit 1
+          fi
+
+          echo "HTML structure test passed"
+
+      - name: Display results
+        run: |
+          echo "HTML structure tests completed successfully"
+          
